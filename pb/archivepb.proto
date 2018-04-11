@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package archivepb;
+
+
+service go_archive {
+    rpc GetArchiveList(GetArchiveListReq) returns (GetArchiveListRes) {}
+}
+
+message ArchiveItem {
+    string from_host = 1;
+    string item_name = 2;
+    string item_url = 3;
+    string collect_at = 4;
+}
+
+message GetArchiveListReq {
+    int32 offset = 1;
+    int32 limit = 2;
+}
+
+message GetArchiveListRes {
+    repeated ArchiveItem archive_items = 1;
+    int32 total_count = 2;
+}
