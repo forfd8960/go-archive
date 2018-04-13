@@ -4,6 +4,7 @@ package archivepb;
 
 service go_archive {
   rpc GetArchiveList(GetArchiveListReq) returns (GetArchiveListRes) {}
+  rpc GetArchiveItemCount(GetArchiveItemCountReq) returns (GetArchiveItemCountRes) {}
 }
 
 message ArchiveItem {
@@ -20,5 +21,10 @@ message GetArchiveListReq {
 
 message GetArchiveListRes {
   repeated ArchiveItem archive_items = 1;
-  int64 total_count = 2;
+}
+
+message GetArchiveItemCountReq {}
+
+message GetArchiveItemCountRes {
+    int64 count = 1;
 }
