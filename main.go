@@ -1,21 +1,23 @@
 package main
 
 import (
-	"flag"
-	"net"
 	"context"
+	"flag"
 	"log"
+	"net"
 
 	"google.golang.org/grpc"
 
-	pb "github.com/forfd8960/go-archive/pb"
+	"github.com/forfd8960/go-archive/archive"
 	"github.com/forfd8960/go-archive/conf"
 	"github.com/forfd8960/go-archive/db"
-	"github.com/forfd8960/go-archive/archive"
 	"github.com/forfd8960/go-archive/model"
+	pb "github.com/forfd8960/go-archive/pb"
 )
 
 func main() {
+	grpc.EnableTracing = false
+
 	configPath := flag.String("config", "conf/config.toml", "config file's path")
 	flag.Parse()
 
@@ -24,7 +26,7 @@ func main() {
 
 	listen, err := net.Listen("tcp", conf.Conf.ListenAddr)
 	if err != nil {
-		log.Fatalf("serve error: %v\n", err)
+		log.Fatalf("listen error: %v\n", err)
 	}
 
 	ctx := context.Background()
